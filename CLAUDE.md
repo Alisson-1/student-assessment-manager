@@ -135,6 +135,21 @@ Do not collapse layers (e.g., never import `fs` from a controller, never call `f
 
 ---
 
+## 4. External Skills (skills.sh)
+
+This project integrates external skills via [skills.sh](https://skills.sh) (the Vercel Labs skill manager). Installed skills live under [.agents/skills/](.agents/skills/) and are tracked in [skills-lock.json](skills-lock.json). When a task matches a skill's description, prefer applying that skill's guidance over generic advice.
+
+| Skill | Source | Location | When to apply |
+|-------|--------|----------|---------------|
+| **cucumber-gherkin** | `el-feo/ai-context` (GitHub) | [.agents/skills/cucumber-gherkin/](.agents/skills/cucumber-gherkin/) | Writing or editing `.feature` files, step definitions, hooks, Cucumber configuration, or any BDD/acceptance-test work under [sistema/backend/features/](sistema/backend/features/). |
+| **nodejs-backend-patterns** | `wshobson/agents` (GitHub) | [.agents/skills/nodejs-backend-patterns/](.agents/skills/nodejs-backend-patterns/) | Designing or modifying the Express backend: routes, controllers, services, repositories, middleware, error handling, and API design under [sistema/backend/](sistema/backend/). |
+| **vercel-react-best-practices** | `vercel-labs/agent-skills` (GitHub) | [.agents/skills/vercel-react-best-practices/](.agents/skills/vercel-react-best-practices/) | Writing, reviewing, or refactoring React/TypeScript code in the Vite frontend: components, hooks, pages, data fetching, and performance under [sistema/frontend/](sistema/frontend/). |
+| **git-commit** | `github/awesome-copilot` (GitHub) | [.agents/skills/git-commit/](.agents/skills/git-commit/) | Crafting commit messages that follow the Conventional Commits specification (auto-detected type/scope, intelligent staging). Apply whenever committing changes in this repo. |
+
+Before starting work in any of the areas above, open the corresponding `SKILL.md` (and `references/` or `rules/` folders when present) and follow the guidance it defines. Do not modify files under `.agents/skills/` or `skills-lock.json` manually — they are managed by `skills.sh`.
+
+---
+
 ## Working Agreements for the Agent
 
 - Prefer editing existing files over creating new ones; do not introduce files outside the structure above without asking.
