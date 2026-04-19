@@ -1,3 +1,5 @@
+import { StudentsPage } from './pages/StudentsPage';
+
 export default function App() {
-  return <div />;
+  return <StudentsPage />;
 }
