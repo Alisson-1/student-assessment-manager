@@ -1,7 +1,7 @@
 import { After, Before, setWorldConstructor, World, IWorldOptions } from '@cucumber/cucumber';
 import { promises as fs } from 'node:fs';
-import { Server } from 'node:http';
-import { AddressInfo } from 'node:net';
+import type { Server } from 'http';
+import type { AddressInfo } from 'net';
 import os from 'node:os';
 import path from 'node:path';
 import { createApp } from '../../src/app';
