@@ -1,5 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { Student, StudentInput } from '../models/student';
+import * as assessmentRepo from '../repositories/assessmentRepository';
 import * as repo from '../repositories/studentRepository';
 import { ConflictError, NotFoundError, ValidationError } from '../utils/errors';
 
@@ -80,4 +81,5 @@ export async function updateStudent(
 export async function deleteStudent(id: string): Promise<void> {
   const removed = await repo.deleteById(id);
   if (!removed) throw new NotFoundError('Student not found');
+  await assessmentRepo.deleteByStudent(id);
 }

@@ -1,4 +1,6 @@
 import express, { Express, NextFunction, Request, Response } from 'express';
+import { assessmentRoutes } from './routes/assessmentRoutes';
+import { goalRoutes } from './routes/goalRoutes';
 import { studentRoutes } from './routes/studentRoutes';
 import { errorHandler } from './utils/errorHandler';
 
@@ -18,6 +20,8 @@ export function createApp(): Express {
   });
 
   app.use('/api/students', studentRoutes());
+  app.use('/api/goals', goalRoutes());
+  app.use('/api/assessments', assessmentRoutes());
 
   app.use(errorHandler);
   return app;

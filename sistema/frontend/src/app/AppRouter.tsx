@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { AssessmentsPage } from '@/features/assessments';
 import { StudentsPage } from '@/features/students';
 import { ComingSoonPage } from '@/pages/ComingSoonPage';
 import { HomePage } from '@/pages/HomePage';
@@ -22,15 +23,7 @@ export function AppRouter() {
               />
             }
           />
-          <Route
-            path={routes.assessments}
-            element={
-              <ComingSoonPage
-                title="Assessments"
-                description="Record MANA, MPA, and MA for each student and goal."
-              />
-            }
-          />
+          <Route path={routes.assessments} element={<AssessmentsPage />} />
           <Route path="/home" element={<Navigate to={routes.home} replace />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>

@@ -13,11 +13,17 @@ export interface StudentRecord {
   email: string;
 }
 
+export interface GoalRecord {
+  id: string;
+  name: string;
+}
+
 export class TalpWorld extends World {
   baseUrl = '';
   dataDir = '';
   server: Server | null = null;
   studentsByName: Map<string, StudentRecord> = new Map();
+  goalsByName: Map<string, GoalRecord> = new Map();
   lastStatus = 0;
   lastBody: unknown = null;
 
@@ -39,6 +45,7 @@ Before(async function (this: TalpWorld) {
   this.baseUrl = `http://127.0.0.1:${address.port}`;
 
   this.studentsByName = new Map();
+  this.goalsByName = new Map();
   this.lastStatus = 0;
   this.lastBody = null;
 });
