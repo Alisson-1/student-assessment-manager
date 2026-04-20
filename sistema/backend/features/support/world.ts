@@ -18,12 +18,21 @@ export interface GoalRecord {
   name: string;
 }
 
+export interface ClassRecord {
+  id: string;
+  topic: string;
+  year: number;
+  semester: number;
+  studentIds: string[];
+}
+
 export class TalpWorld extends World {
   baseUrl = '';
   dataDir = '';
   server: Server | null = null;
   studentsByName: Map<string, StudentRecord> = new Map();
   goalsByName: Map<string, GoalRecord> = new Map();
+  classesByTopic: Map<string, ClassRecord> = new Map();
   lastStatus = 0;
   lastBody: unknown = null;
 
@@ -46,6 +55,7 @@ Before(async function (this: TalpWorld) {
 
   this.studentsByName = new Map();
   this.goalsByName = new Map();
+  this.classesByTopic = new Map();
   this.lastStatus = 0;
   this.lastBody = null;
 });

@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { Goal, GoalInput } from '../models/goal';
 import * as repo from '../repositories/goalRepository';
 import * as assessmentRepo from '../repositories/assessmentRepository';
+import * as classAssessmentRepo from '../repositories/classAssessmentRepository';
 import { ConflictError, NotFoundError, ValidationError } from '../utils/errors';
 
 function validateInput(input: Partial<GoalInput>): GoalInput {
@@ -54,4 +55,5 @@ export async function deleteGoal(id: string): Promise<void> {
   const removed = await repo.deleteById(id);
   if (!removed) throw new NotFoundError('Goal not found');
   await assessmentRepo.deleteByGoal(id);
+  await classAssessmentRepo.deleteByGoal(id);
 }
