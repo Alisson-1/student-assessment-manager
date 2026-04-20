@@ -13,7 +13,10 @@
     "allowImportingTsExtensions": false,
     "noEmit": true,
     "isolatedModules": true,
-    "useDefineForClassFields": true
+    "useDefineForClassFields": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["src"]
 }
