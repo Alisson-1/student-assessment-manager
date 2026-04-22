@@ -8,6 +8,7 @@ import * as repo from '../repositories/classAssessmentRepository';
 import * as classRepo from '../repositories/classRepository';
 import * as goalRepo from '../repositories/goalRepository';
 import * as studentRepo from '../repositories/studentRepository';
+import * as emailService from './emailService';
 import { NotFoundError, ValidationError } from '../utils/errors';
 
 function validateInput(input: Partial<AssessmentInput>): AssessmentInput {
@@ -57,7 +58,15 @@ export async function setClassAssessment(
     value: data.value,
     updatedAt: new Date().toISOString(),
   };
-  return repo.upsert(assessment);
+  const saved = await repo.upsert(assessment);
+  await emailService.recordAssessmentChange({
+    student,
+    goal,
+    classRoom,
+    value: saved.value,
+    occurredAt: saved.updatedAt,
+  });
+  return saved;
 }
 
 export async function clearClassAssessment(

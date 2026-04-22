@@ -7,6 +7,7 @@ import {
 import * as assessmentRepo from '../repositories/assessmentRepository';
 import * as goalRepo from '../repositories/goalRepository';
 import * as studentRepo from '../repositories/studentRepository';
+import * as emailService from './emailService';
 import { NotFoundError, ValidationError } from '../utils/errors';
 
 function validateInput(input: Partial<AssessmentInput>): AssessmentInput {
@@ -43,7 +44,15 @@ export async function setAssessment(
     value: data.value,
     updatedAt: new Date().toISOString(),
   };
-  return assessmentRepo.upsert(assessment);
+  const saved = await assessmentRepo.upsert(assessment);
+  await emailService.recordAssessmentChange({
+    student,
+    goal,
+    classRoom: null,
+    value: saved.value,
+    occurredAt: saved.updatedAt,
+  });
+  return saved;
 }
 
 export async function clearAssessment(studentId: string, goalId: string): Promise<void> {
